@@ -13,6 +13,8 @@ import termsIcon from "../../assets/images/terms-of-use.png";
 import faqIcon from "../../assets/images/faq.png";
 import conductIcon from "../../assets/images/code-of-conduct.png";
 import chatIcon from "../../assets/images/chat.png";
+// import { setCurrentPost } from "../../redux/features/post/postSlice";
+import { useDispatch } from "react-redux";
 
 const headerLinks = [
   {
@@ -31,6 +33,12 @@ const headerLinks = [
 
 export const Home = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  // setCurrentPost
+  // const handler = () => {
+  //   dispatch(setCurrentPost(null))
+  // }
 
   return (
     <>
