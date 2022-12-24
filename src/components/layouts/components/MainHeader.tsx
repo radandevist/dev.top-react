@@ -10,7 +10,7 @@ import { RiNotification3Line, RiSearchLine } from "react-icons/ri"
 export const MainHeader = () => {
   return (
     <header tw="fixed top-0 left-0 right-0 z-10 bg-white shadow-crayon">
-      <div tw="max-w-screen-xl m-auto px-2 flex items-center relative h-14">
+      <div tw="max-w-screen-xl mx-auto px-2 lg:px-4 flex items-center relative h-14">
         <MobileMenuNav />
         <DevLogo />
 

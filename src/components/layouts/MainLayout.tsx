@@ -9,8 +9,8 @@ export const MainLayout = () => {
   return (
     <>
       <MainHeader />
-      <div tw="flex h-screen flex-col">
-        <div tw="h-14" />
+      <div tw="flex h-screen flex-col pt-14">
+        {/* <div tw="h-14" /> */}
         <div tw="flex-1">
           <Outlet />
         </div>
