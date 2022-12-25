@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
-type IPost = {
+export type IPost = {
   title: string;
   content: string;
   author: string;
@@ -23,14 +23,18 @@ export const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    setCurrentPost: (state, action: PayloadAction<IPost | null>) => {
+    setCurrentPost: (state, action: PayloadAction<IPost>) => {
       state.currentPost = action.payload;
+    },
+    clearCurrentPost: (state) => {
+      state.currentPost = null;
     }
   }
 })
 
 export const {
   setCurrentPost,
+  clearCurrentPost,
 } = postSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
