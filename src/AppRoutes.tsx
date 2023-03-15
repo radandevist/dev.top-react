@@ -1,14 +1,14 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom"
-import { MainLayout } from "./components/layouts/MainLayout"
 // import { ProtectedRoute } from "./components/routes/ProtectedRoute"
-import { Home } from "./pages/home/Home"
+import Home from "./pages/home/Home"
 import { Page404 } from "./pages/errors/Page404";
+import Layout from "./components/layout/Layout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       {/* Guest Routes */}
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home/>}/>
         <Route path="/latest" element={<Home/>} />
         <Route path="/top/*" element={<Home/>} />

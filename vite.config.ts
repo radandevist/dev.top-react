@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import macrosPlugin from "vite-plugin-babel-macros";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,11 +16,29 @@ export default defineConfig({
   plugins: [
     react({
       babel: {
+        // presets: [
+        //   "@babel/preset-react",
+        //   "@emotion/babel-preset-css-prop"
+        // ],
         plugins: [
           'babel-plugin-macros',
           'babel-plugin-styled-components',
+          // [
+          //   '@emotion/babel-plugin-jsx-pragmatic',
+          //   {
+          //     export: 'jsx',
+          //     import: '__cssprop',
+          //     module: '@emotion/react',
+          //   },
+          // ],
+          // [
+          //   '@babel/plugin-transform-react-jsx',
+          //   { pragma: '__cssprop' },
+          //   'twin.macro',
+          // ],
         ],
       },
     }),
+    // macrosPlugin(),
   ]
 })
