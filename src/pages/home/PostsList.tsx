@@ -6,7 +6,7 @@ import { IPost } from "../../types/post.types";
 
 type Props = {
   posts: IPost[];
-  filteredTag: string;
+  filteredTag?: string;
   // toInvalidate: unknown;
   enableImages?: boolean;
 };

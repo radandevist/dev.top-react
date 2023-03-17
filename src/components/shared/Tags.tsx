@@ -8,7 +8,7 @@ import { ITag } from "../../types/tag.types";
 type Props = {
   tags: ITag[];
   isColored?: boolean;
-  filteredTag: string;
+  filteredTag?: string;
 };
 
 const Tags = ({ tags, isColored, filteredTag }: Props) => {

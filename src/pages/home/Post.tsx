@@ -16,7 +16,7 @@ import { IPost } from "../../types/post.types";
 type Props = {
   post: IPost;
   isFirstPost: boolean;
-  filteredTag: string;
+  filteredTag?: string;
   // toInvalidate: unknown;
 };
 

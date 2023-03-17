@@ -13,7 +13,7 @@ import styled from 'styled-components';
 //   useLazyGetFollowingTagsQuery,
 // } from '../../core/features/tags/tagsApiSlice';
 // import useRequireAuth from '../../hooks/useRequireAuth';
-import Hashtag from '../layout/Hashtag';
+import Hashtag from '../shared/Hashtag';
 
 import image1 from "../../assets/images/home.png"
 import image2 from "../../assets/images/reading.png"
