@@ -11,7 +11,8 @@ import useBreakpoint from '../../hooks/useBreakpoint';
 // import useRequireAuth from '../../../hooks/useRequireAuth';
 import LoadingController from '../../components/shared/LoadingController';
 import Tags from '../../components/shared/Tags';
-import { IPost } from "../../types/post.types";
+// import { IPost } from "../../types/post.types";
+import { Post as IPost, Type } from "../../types/queries/homePosts.types";
 
 type Props = {
   post: IPost;
@@ -26,10 +27,15 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
   // const { isAuthed, handleAuth } = useRequireAuth(false);
   const isAuthed = false;
 
-  const { id, author, likes, unicorns, bookmarks } = post;
-  const likesArr = [...likes];
-  const unicornsArr = [...unicorns];
-  const bookmarksArr = [...bookmarks];
+  // const { id, author, likes, unicorns, bookmarks } = post;
+  const { id, author, reactions } = post;
+
+  // const likesArr = [...likes];
+  // const unicornsArr = [...unicorns];
+  // const bookmarksArr = [...bookmarks];
+  const likesArr = reactions.filter(r => r.type === Type.Like);
+  const unicornsArr = reactions.filter(r => r.type === Type.Unicorn);
+  const bookmarksArr = reactions.filter(r => r.type === Type.Bookmark);
 
   const isLoading = false;
   // const { state, handleReaction, isLoading } = usePostReaction(
@@ -58,16 +64,19 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
         {isFirstPost && (
           <Image
             onClick={() =>
-              navigate(`/${post.author?.username}/${createPostUrl(post.title, post.id)}`)
+              navigate(`/${post.author.userName}/${createPostUrl(post.title, post.id)}`)
             }
-            src={post.image.url}
+            // src={post.image.url}
+            src={post.coverImageUrl}
           />
         )}
         <Content>
-          <Header onClick={() => navigate(`/${post?.author.username}`)}>
-            <Author src={post.author?.picture?.url} />
+          <Header onClick={() => navigate(`/${post?.author.userName}`)}>
+            {/* <Author src={post.author?.picture?.url} /> */}
+            <Author src={post.author.profilePicUrl} />
             <AuthorMeta>
-              <AuthorName>{post.author?.name}</AuthorName>
+              {/* <AuthorName>{post.author?.name}</AuthorName> */}
+              <AuthorName>{post.author.firstName} {post.author.lastName}</AuthorName>
               <CreatedAt>{formatDate(post.createdAt)}</CreatedAt>
               {formatDate(post.updatedAt) !== formatDate(post.createdAt) && (
                 <UpdatedAt>{`Updated ${formatDate(post.updatedAt)}`}</UpdatedAt>
@@ -76,7 +85,7 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
           </Header>
           <Title
             onClick={() =>
-              navigate(`/${post.author.username}/${createPostUrl(post.title, post.id)}`)
+              navigate(`/${post.author.userName}/${createPostUrl(post.title, post.id)}`)
             }>
             {post.title}
           </Title>
@@ -84,18 +93,23 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
           <Footer>
             <Reactions
               onClick={() =>
-                navigate(`/${post.author.username}/${createPostUrl(post.title, post.id)}`)
+                navigate(`/${post.author.userName}/${createPostUrl(post.title, post.id)}`)
               }>
               <SumOfReactions>
                 <HeartIcon>
                   <AiOutlineHeart />
                 </HeartIcon>
-                <Total>
+                {/* <Total>
                   {isSmall
                     ? post.likes.length + post.unicorns.length + post.bookmarks.length
                     : `${
                         post.likes.length + post.unicorns.length + post.bookmarks.length
                       } reactions`}
+                </Total> */}
+                <Total>
+                  {isSmall
+                    ? post.reactions.length
+                    : `${post.reactions.length} reactions`}
                 </Total>
               </SumOfReactions>
               <SumOfComments>
@@ -103,13 +117,15 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
                   <MdOutlineModeComment />
                 </CommentIcon>
                 <Total>
-                  {isSmall ? post.comments?.length : `${post.comments?.length} comments`}
+                  {/* {isSmall ? post.comments?.length : `${post.comments?.length} comments`} */}
+                  {/* TODO: Comments */}
+                  {isSmall ? "TODO" : `TODO comments`}
                 </Total>
               </SumOfComments>
             </Reactions>
             <Other>
               <MinutesRead>
-                {calcReadingTime(post.body)} {`min ${!isSmall ? 'read' : ''}`}
+                {calcReadingTime(post.content)} {`min ${!isSmall ? 'read' : ''}`}
               </MinutesRead>
               <LoadingController isLoading={isLoading}>
                 <SaveButton

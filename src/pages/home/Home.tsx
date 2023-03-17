@@ -2,9 +2,11 @@ import tw, { theme } from "twin.macro"
 import useBreakpoint from "../../hooks/useBreakpoint"
 import Resources from "../../components/shared/Resources"
 import PostsList from "./PostsList"
-import { IPost } from "../../types/post.types"
+// import { IPost } from "../../types/post.types"
 import Tags from "./Tags"
 import RouteWrapper from "../../components/shared/RouteWrapper"
+import { useGetHomePostsByPageQuery } from "../../redux/services/mainApi"
+import LoadingSpinner from "../../components/shared/LoadingSpinner"
 
 type Props = {}
 
@@ -18,7 +20,10 @@ const Home = (_props: Props) => {
   // const { data: posts, isLoading } = useGetPostsQuery(saved ? id : null, {
   //   refetchOnMountOrArgChange: true,
   // });
-  const posts: IPost[] = [];
+  const { data, isLoading } = useGetHomePostsByPageQuery(4, {
+    refetchOnMountOrArgChange: true,
+  });
+  // const posts: IPost[] = [];
 
   const saved = false;
 
@@ -32,8 +37,8 @@ const Home = (_props: Props) => {
     <RouteWrapper>
       <Wrapper>
         {!isMobile && <Resources saved={saved} />}
-        {/* {isLoading ? <LoadingSpinner /> : <PostsList posts={posts} />} */}
-        <PostsList posts={posts} />
+        {isLoading ? <LoadingSpinner /> : <PostsList posts={data!.data.posts} />}
+        {/* <PostsList posts={posts} /> */}
         {!isLaptop && <Tags />}
       </Wrapper>
     </RouteWrapper>

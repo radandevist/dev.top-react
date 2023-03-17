@@ -7,3 +7,5 @@
 //   // bookmarks: unknown[];
 // };
 export type IPost = Record<string, any>;
+
+// export type HomePostsQueryData = {};
