@@ -1,0 +1,1 @@
+export type ITag = Record<string, any>;

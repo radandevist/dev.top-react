@@ -14,7 +14,6 @@ import styled from 'styled-components';
 // } from '../../core/features/tags/tagsApiSlice';
 // import useRequireAuth from '../../hooks/useRequireAuth';
 import Hashtag from '../layout/Hashtag';
-import Social from '../layout/Social';
 
 import image1 from "../../assets/images/home.png"
 import image2 from "../../assets/images/reading.png"
@@ -25,6 +24,7 @@ import image6 from "../../assets/images/chat.png"
 import image7 from "../../assets/images/code-of-conduct.png"
 import image8 from "../../assets/images/privacy-policy.png"
 import image9 from "../../assets/images/terms-of-use.png"
+import Social from "./Social";
 
 type Props = {
   saved: boolean;

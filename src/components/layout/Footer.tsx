@@ -1,7 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom';
 import tw from 'twin.macro';
-import Social from './Social';
-
+import Social from "../shared/Social";
 const Footer = () => {
   return (
     <Wrapper>
