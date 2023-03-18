@@ -5,31 +5,34 @@ import tw, { styled } from 'twin.macro';
 // import Hashtag from '../../../common/Hashtag';
 import { decreaseOpacity } from '../../helpers/utils';
 import Hashtag from "../../components/shared/Hashtag";
-import { ITag } from "../../types/tag.types";
 import FollowTag from "../../components/shared/FollowTag";
+import { TagsLisQueryData } from "../../types/queries/tagsList.types";
 
 type Props = {
-  tag: ITag;
+  tag: TagsLisQueryData['tags'][0];
   isTagPage: boolean;
+  isFollowed: boolean;
 };
 
-const Tag = ({ tag, isTagPage }: Props) => {
+const Tag = ({ tag, isTagPage, isFollowed }: Props) => {
   const navigate = useNavigate();
 
   return (
     <Wrapper>
-      <Bg color={tag.hashtagColor} />
+      <Bg color={tag.color} />
       <Title
-        bg={decreaseOpacity(tag.hashtagColor)}
-        color={tag.hashtagColor}
+        bg={decreaseOpacity(tag.color)}
+        color={tag.color}
         onClick={() => navigate(`/tags/${tag.name}`)}>
-        <HashtagWrapper color={tag.hashtagColor}>
+        <HashtagWrapper color={tag.color}>
           <Hashtag />
         </HashtagWrapper>
         {tag.name}
       </Title>
-      <Posts>{tag.posts.length} posts published</Posts>
-      <FollowTag tag={tag} isFollowed={tag.isFollowed} isTagPage={isTagPage} />
+      {/* <Posts>{tag.posts.length} posts published</Posts> */}
+      <Posts>{tag._count.posts} posts published</Posts>
+      {/* <FollowTag tag={tag} isFollowed={tag.isFollowed} isTagPage={isTagPage} /> */}
+      <FollowTag tag={tag} isFollowed={isFollowed} isTagPage={isTagPage} />
     </Wrapper>
   );
 };

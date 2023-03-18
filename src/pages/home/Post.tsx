@@ -12,10 +12,10 @@ import useBreakpoint from '../../hooks/useBreakpoint';
 import LoadingController from '../../components/shared/LoadingController';
 import Tags from '../../components/shared/Tags';
 // import { IPost } from "../../types/post.types";
-import { Post as IPost, Type } from "../../types/queries/homePosts.types";
+import { HomePostsQueryData /* Type */ } from "../../types/queries/homePosts.types";
 
 type Props = {
-  post: IPost;
+  post: HomePostsQueryData["posts"][0];
   isFirstPost: boolean;
   filteredTag?: string;
   // toInvalidate: unknown;
@@ -28,14 +28,15 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
   const isAuthed = false;
 
   // const { id, author, likes, unicorns, bookmarks } = post;
-  const { id, author, reactions } = post;
+  // const { id, author, reactions } = post;
+  const { id, author } = post;
 
   // const likesArr = [...likes];
   // const unicornsArr = [...unicorns];
   // const bookmarksArr = [...bookmarks];
-  const likesArr = reactions.filter(r => r.type === Type.Like);
-  const unicornsArr = reactions.filter(r => r.type === Type.Unicorn);
-  const bookmarksArr = reactions.filter(r => r.type === Type.Bookmark);
+  // const likesArr = reactions.filter(r => r.type === Type.Like);
+  // const unicornsArr = reactions.filter(r => r.type === Type.Unicorn);
+  // const bookmarksArr = reactions.filter(r => r.type === Type.Bookmark);
 
   const isLoading = false;
   // const { state, handleReaction, isLoading } = usePostReaction(
@@ -108,8 +109,8 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
                 </Total> */}
                 <Total>
                   {isSmall
-                    ? post.reactions.length
-                    : `${post.reactions.length} reactions`}
+                    ? post._count.reactions
+                    : `${post._count.reactions} reactions`}
                 </Total>
               </SumOfReactions>
               <SumOfComments>

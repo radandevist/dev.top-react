@@ -21,7 +21,7 @@ const Home = (_props: Props) => {
   // const { data: posts, isLoading } = useGetPostsQuery(saved ? id : null, {
   //   refetchOnMountOrArgChange: true,
   // });
-  const { data, isLoading } = useGetHomePostsByPageQuery(4, {
+  const { data, isLoading } = useGetHomePostsByPageQuery(1, {
     refetchOnMountOrArgChange: true,
   });
   // const posts: IPost[] = [];

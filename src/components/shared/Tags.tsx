@@ -20,14 +20,14 @@ const Tags = ({ tags, isColored, filteredTag }: Props) => {
         <Tag
           key={nanoid()}
           isFiltered={tag.name === filteredTag}
-          color={tag.hashtagColor}
-          bg={decreaseOpacity(tag.hashtagColor)}
+          color={tag.color}
+          bg={decreaseOpacity(tag.color)}
           isColored={isColored}
           onClick={() => navigate(`/tags/${tag.name}`)}>
           <HashtagWrapper
             isFiltered={tag.name === filteredTag}
             isColored={isColored}
-            color={tag.hashtagColor}>
+            color={tag.color}>
             <Hashtag />
           </HashtagWrapper>
           {tag.name}

@@ -9,10 +9,14 @@ const Tags = () => {
     // const { data: tags } = useGetNumTagsQuery(null, { refetchOnMountOrArgChange: true });
     const tags: (ITag & {
       posts: IPost[]; 
-    })[] = [
+    })[] = [ // ! Temporry hardcoded value !
       {
         name: 'React',
-        posts: []
+        posts: [],
+        id: 'fsdfs',
+        color: '#000',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ];
 

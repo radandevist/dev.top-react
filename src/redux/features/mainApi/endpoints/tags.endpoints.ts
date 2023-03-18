@@ -5,7 +5,7 @@ import { mainApiSlice } from "../mainApi.slice";
 const mainApiTagsEndpoints = mainApiSlice.injectEndpoints({
   endpoints: builder => ({
     getTagsListByPage: builder.query<ApiResBody<TagsLisQueryData>, number>({
-      query: (pageNum: number) => "/posts/home?page="+pageNum,
+      query: (pageNum: number) => "/tags?page="+pageNum,
     }),
   }),
 })

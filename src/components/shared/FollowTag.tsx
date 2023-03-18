@@ -25,8 +25,8 @@ const FollowTag = ({ tag, isFollowed, isTagPage, isLarge = false }: Props) => {
   return (
     <LoadingController isLoading={isLoading}>
       <FollowButton
-        bg={decreaseOpacity(tag.hashtagColor, 0.5)}
-        color={tag.hashtagColor}
+        bg={decreaseOpacity(tag.color, 0.5)}
+        color={tag.color}
         isFollowed={isFollowed}
         isLarge={isLarge}
         onClick={() => {
