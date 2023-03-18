@@ -5,10 +5,9 @@
 //   const homePostsQueryData = Convert.toHomePostsQueryData(json);
 
 export type HomePostsQueryData = {
-  limit: number;
-  count: number;
-  page:  number;
-  posts: Post[];
+  postsCount: number;
+  count:      number;
+  posts:      Post[];
 }
 
 export type Post = {
@@ -26,8 +25,13 @@ export type Post = {
   createdAt:     Date;
   updatedAt:     Date;
   author:        Author;
-  reactions:     Reaction[];
   tags:          Tag[];
+  _count:        Count;
+}
+
+export type Count = {
+  comments:  number;
+  reactions: number;
 }
 
 export type Author = {
@@ -44,29 +48,19 @@ export type Author = {
   updatedAt:     Date;
 }
 
-export type Reaction = {
-  id:        string;
-  type:      Type;
-  userId:    string;
-  postId:    string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export enum Type {
-  Bookmark = "BOOKMARK",
-  Like = "LIKE",
-  Unicorn = "UNICORN",
-}
-
 export type Tag = {
   id:        string;
   name:      string;
+  color:     Color;
   createdAt: Date;
   updatedAt: Date;
 }
 
-// Converts JSON strings to/from your types
+export enum Color {
+  The000000 = "#000000",
+}
+
+// // Converts JSON strings to/from your types
 // export class Convert {
 //   public static toHomePostsQueryData(json: string): HomePostsQueryData {
 //       return JSON.parse(json);

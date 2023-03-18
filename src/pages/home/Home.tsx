@@ -5,8 +5,9 @@ import PostsList from "./PostsList"
 // import { IPost } from "../../types/post.types"
 import Tags from "./Tags"
 import RouteWrapper from "../../components/shared/RouteWrapper"
-import { useGetHomePostsByPageQuery } from "../../redux/services/mainApi"
+// import { useGetHomePostsByPageQuery } from "../../redux/features/mainApi/mainApi.slice"
 import LoadingSpinner from "../../components/shared/LoadingSpinner"
+import { useGetHomePostsByPageQuery } from "../../redux/features/mainApi/endpoints/posts.endpoints"
 
 type Props = {}
 
@@ -37,7 +38,8 @@ const Home = (_props: Props) => {
     <RouteWrapper>
       <Wrapper>
         {!isMobile && <Resources saved={saved} />}
-        {isLoading ? <LoadingSpinner /> : <PostsList posts={data!.data.posts} />}
+        {/* {isLoading ? <LoadingSpinner /> : <PostsList posts={data!.data.posts} />} */}
+        {isLoading ? <LoadingSpinner /> : <PostsList posts={data ? data.data.posts : []} />}
         {/* <PostsList posts={posts} /> */}
         {!isLaptop && <Tags />}
       </Wrapper>

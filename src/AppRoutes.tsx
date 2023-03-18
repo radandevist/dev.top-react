@@ -3,6 +3,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Home from "./pages/home/Home"
 import { Page404 } from "./pages/errors/Page404";
 import Layout from "./components/layout/Layout";
+import Tags from "./pages/tags/Tags";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -12,6 +13,10 @@ const router = createBrowserRouter(
         <Route index element={<Home/>}/>
         <Route path="/latest" element={<Home/>} />
         <Route path="/top/*" element={<Home/>} />
+
+        <Route path="tags">
+          <Route index element={<Tags />} />
+        </Route>
 
         <Route path="*" element={<Page404 />} />
 

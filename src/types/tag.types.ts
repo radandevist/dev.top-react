@@ -1,1 +1,7 @@
-export type ITag = Record<string, any>;
+export type ITag = {
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+  color?: string; // TODO: idk 
+};
