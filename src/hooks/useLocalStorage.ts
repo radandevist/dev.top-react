@@ -1,28 +1,30 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useDebugValue, useEffect, useState } from "react";
 
-const getLocalValue = <T>(key: string, initialValue: T) => {
-  // If using SSR Next.js
-  if (typeof window === 'undefined') return initialValue;
+export const useLocalStorage = <S>(
+  key: string,
+  initialState?: S | (() => S)
+): [S, React.Dispatch<React.SetStateAction<S>>] => {
+  const [state, setState] = useState<S>(initialState as S);
+  useDebugValue(state);
 
-  // If a value is already stored
-  const item = localStorage.getItem(key);
-  if (!item) return initialValue;
+  useEffect(() => {
+    const item = localStorage.getItem(key);
+    if (item) setState(parse(item));
+  }, []);
 
-  const localValue = JSON.parse(item);
-  if (localValue) return localValue;
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [state]);
 
-  // If a value is a result of a function
-  if (initialValue instanceof Function) return initialValue();
-
-  return initialValue;
+  return [state, setState];
 };
 
-const useLocalStorage = <T = any>(key: string, initialValue: T): [T, Dispatch<SetStateAction<T>>] => {
-  const [value, setValue] = useState<T>(() => getLocalValue<T>(key, initialValue));
-
-  useEffect(() => localStorage.setItem(key, JSON.stringify(value)), [key, value]);
-
-  return [value, setValue];
+const parse = (value: string) => {
+  try {
+    return JSON.parse(value);
+  } catch {
+    return value;
+  }
 };
 
 export default useLocalStorage;

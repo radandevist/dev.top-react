@@ -10,6 +10,8 @@ import Posts from './Posts';
 import Tags from './Tags';
 import useLocalStorage from "../../hooks/useLocalStorage";
 import RouteWrapper from "../../components/shared/RouteWrapper";
+import { useAppSelector } from "../../redux/hooks";
+import { selectSearchValue } from "../../redux/features/search/search.slice";
 
 enum SearchOptions {
   POSTS = 'posts',
@@ -22,12 +24,12 @@ const Search = () => {
   const [selected, setSelected] = useLocalStorage<SearchOptions>('selected-search', SearchOptions.POSTS);
   // const [selected, setSelected] = useState<SearchOptions>(SearchOptions.POSTS);
   // const value = useSelector(selectSearchValue);
-  const value = "TODO: search value"
+  const value = useAppSelector(selectSearchValue);
 
   return (
     <RouteWrapper>
       <Wrapper>
-        <Heading>Search results for {value}</Heading>
+        <Heading>{value && "Search results for \""+value+"\""}</Heading>
         <SearchWrapper>
           <Aside>
             <Type

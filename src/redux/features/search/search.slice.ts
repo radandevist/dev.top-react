@@ -27,6 +27,6 @@ export const {
   resetValue,
 } = searchSlice.actions;
 
-export const selectSearchSliceValue = (state: RootState) => state.search.value;
+export const selectSearchValue = (state: RootState) => state.search.value;
 
 export const { reducer: searchReducer } = searchSlice;

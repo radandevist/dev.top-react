@@ -3,25 +3,33 @@ import { FiSearch } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { selectSearchSliceValue, setSearchValue } from "../../redux/features/search/search.slice";
+import { selectSearchValue, setSearchValue } from "../../redux/features/search/search.slice";
 import { hasOnlySpace } from "../../utils/stringUtils";
 // import useSearchInput from '../../../hooks/useSearchInput';
 
 const Search = () => {
   // const { searchAttrs, value } = useSearchInput();
   const navigate = useNavigate();
-  const value = useAppSelector(selectSearchSliceValue);
+  const value = useAppSelector(selectSearchValue);
   const dispatch = useAppDispatch();
 
-  const handleFormEntreKey: KeyboardEventHandler = (event) => {
+  const handleFormEnterKey: KeyboardEventHandler = (event) => {
     value && event.key === 'Enter' && navigate('/search')
   }
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    hasOnlySpace(event.target.value) && dispatch(setSearchValue(event.target.value));
+    const targetValue = event.target.value;
+
+    if (hasOnlySpace(targetValue)) return;
+    if (targetValue.length < 2) return;
+
+    dispatch(setSearchValue(targetValue));
   };
 
-  const handleSearchButtonClick: MouseEventHandler = (event) => {
+  const handleSearchButtonClick: MouseEventHandler = (_event) => {
+    if (hasOnlySpace(value)) return;
+    if (value.length < 2) return;
+
     value && navigate('/search');
   }
 
@@ -32,8 +40,12 @@ const Search = () => {
     //     <FiSearch onClick={() => value && navigate('/search')} />
     //   </SearchIcon>
     // </Form>
-    <Form onKeyDown={handleFormEntreKey}>
-      <Input placeholder="Search..." value={value} onChange={handleInputChange} />
+    <Form onKeyDown={handleFormEnterKey}>
+      <Input
+        placeholder="Search..."
+        // value={value}
+        onChange={handleInputChange}
+      />
       <SearchIcon>
         <FiSearch onClick={handleSearchButtonClick} />
       </SearchIcon>
