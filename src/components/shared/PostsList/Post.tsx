@@ -1,21 +1,56 @@
-import { useEffect } from 'react';
+import { ComponentProps, useEffect } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { MdOutlineModeComment } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import tw, { styled, theme } from 'twin.macro';
-import { createPostUrl, formatDate } from '../../helpers/string';
-import { calcReadingTime } from '../../helpers/utils';
-import useBreakpoint from '../../hooks/useBreakpoint';
+import { createPostUrl, formatDate } from '../../../helpers/string';
+import { calcReadingTime } from '../../../helpers/utils';
+import useBreakpoint from '../../../hooks/useBreakpoint';
 // import usePostReaction from '../../../hooks/usePostReaction';
 // import useRequireAuth from '../../../hooks/useRequireAuth';
-import LoadingController from '../../components/shared/LoadingController';
-import Tags from '../../components/shared/Tags';
+import LoadingController from '../LoadingController';
+import Tags from './Tags';
 // import { IPost } from "../../types/post.types";
-import { HomePostsQueryData /* Type */ } from "../../types/queries/homePosts.types";
+// import { HomePostsQueryData /* Type */ } from "../../../types/queries/homePosts.types";
+
+type ILocalAuthor = {
+  userName: string;
+  profilePicUrl: string;
+  firstName?: string;
+  lastName: string;
+};
+
+// type ILocalTag = {}
+
+type ILocalCount = {
+  reactions: number;
+  comments: number;
+}
+
+type ILocalPost = {
+  id: string;
+  title: string;
+  // subtitle: string;
+  content: string;
+  coverImageUrl: string;
+  // slug: string;
+  // deleted: boolean;
+  // pinned: boolean;
+  // published: boolean;
+  // publishedAt: Date;
+  // userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  // 
+  author: ILocalAuthor;
+  tags: ComponentProps<typeof Tags>["tags"];
+  _count: ILocalCount;
+}
 
 type Props = {
-  post: HomePostsQueryData["posts"][0];
+  // post: HomePostsQueryData["posts"][0];
+  post: ILocalPost,
   isFirstPost: boolean;
   filteredTag?: string;
   // toInvalidate: unknown;
@@ -77,7 +112,7 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
             <Author src={post.author.profilePicUrl} />
             <AuthorMeta>
               {/* <AuthorName>{post.author?.name}</AuthorName> */}
-              <AuthorName>{post.author.firstName} {post.author.lastName}</AuthorName>
+              <AuthorName>{post.author.firstName || ''} {post.author.lastName}</AuthorName>
               <CreatedAt>{formatDate(post.createdAt)}</CreatedAt>
               {formatDate(post.updatedAt) !== formatDate(post.createdAt) && (
                 <UpdatedAt>{`Updated ${formatDate(post.updatedAt)}`}</UpdatedAt>
@@ -118,9 +153,8 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
                   <MdOutlineModeComment />
                 </CommentIcon>
                 <Total>
-                  {/* {isSmall ? post.comments?.length : `${post.comments?.length} comments`} */}
-                  {/* TODO: Comments */}
-                  {isSmall ? "TODO" : `TODO comments`}
+                  {isSmall ? post._count.comments : `${post._count.comments} comments`}
+                  {/* {isSmall ? "TODO" : `TODO comments`} */}
                 </Total>
               </SumOfComments>
             </Reactions>

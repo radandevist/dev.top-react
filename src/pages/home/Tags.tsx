@@ -7,7 +7,7 @@ import { IPost } from "../../types/post.types";
 
 const Tags = () => {
     // const { data: tags } = useGetNumTagsQuery(null, { refetchOnMountOrArgChange: true });
-    const tags: (ITag & {
+    const tags: (ITag & { // TODO: Replace
       posts: IPost[]; 
     })[] = [ // ! Temporry hardcoded value !
       {

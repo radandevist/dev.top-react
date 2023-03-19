@@ -4,12 +4,16 @@ import tw, { styled } from 'twin.macro';
 // import { useHandleFollowMutation } from '../../core/features/tags/tagsApiSlice';
 import { decreaseOpacity } from '../../helpers/utils';
 import LoadingController from "./LoadingController";
-import { ITag } from "../../types/tag.types";
+// import { ITag } from "../../types/tag.types";
 // import useRequireAuth from '../../hooks/useRequireAuth';
 // import LoadingController from '../LoadingController';
 
+type ILocalTag = {
+  color: string;
+}
+
 type Props = {
-  tag: ITag;
+  tag: ILocalTag;
   isFollowed: boolean;
   isTagPage: boolean;
   isLarge?: boolean;

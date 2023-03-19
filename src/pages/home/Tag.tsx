@@ -2,14 +2,15 @@ import { nanoid } from '@reduxjs/toolkit';
 import { Link, useNavigate } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
 import Hashtag from "../../components/shared/Hashtag";
-import { ITag } from "../../types/tag.types";
-import { IPost } from "../../types/post.types";
+// import { ITag } from "../../types/tag.types";
+// import { IPost } from "../../types/post.types";
 // import Hashtag from '../../../common/Hashtag';
 
-export type Props = {
-  tag: ITag & {
-    posts: IPost[]; 
-  };
+type Props = {
+  // tag: ITag & {
+  //   posts: IPost[]; 
+  // };
+  tag: Record<string, any> // TODO: Replace
 };
 
 const Tag = ({ tag }: Props) => {
@@ -23,7 +24,7 @@ const Tag = ({ tag }: Props) => {
           {tag.name}
         </TagName>
       </Link>
-      {tag.posts.slice(0, 5).map(post => (
+      {tag.posts.slice(0, 5).map((post: any) => ( // TODO: replace
         <PostWrapper
           key={nanoid()}
           onClick={() =>

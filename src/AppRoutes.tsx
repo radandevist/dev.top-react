@@ -4,6 +4,7 @@ import Home from "./pages/home/Home"
 import { Page404 } from "./pages/errors/Page404";
 import Layout from "./components/layout/Layout";
 import Tags from "./pages/tags/Tags";
+import Search from "./pages/search/Search";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -11,8 +12,9 @@ const router = createBrowserRouter(
       {/* Guest Routes */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Home/>}/>
-        <Route path="/latest" element={<Home/>} />
-        <Route path="/top/*" element={<Home/>} />
+        <Route path="search" element={<Search />} />
+        {/* <Route path="/latest" element={<Home/>} /> */}
+        {/* <Route path="/top/*" element={<Home/>} /> */}
 
         <Route path="tags">
           <Route index element={<Tags />} />

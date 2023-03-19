@@ -1,11 +1,18 @@
-// export type IPost = {
-//   // id: string;
-//   // author: unknown;
-//   // image: unknown;
-//   // likes: unknown[];
-//   // unicorns: unknown[];
-//   // bookmarks: unknown[];
-// };
-export type IPost = Record<string, any>;
+export type IPost = {
+  id: string;
+  title: string;
+  subtitle: string;
+  content: string;
+  coverImageUrl: string;
+  slug: string;
+  deleted: boolean;
+  pinned: boolean;
+  published: boolean;
+  publishedAt: Date;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+// export type IPost = Record<string, any>;
 
 // export type HomePostsQueryData = {};

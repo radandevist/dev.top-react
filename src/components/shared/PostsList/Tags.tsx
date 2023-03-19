@@ -1,12 +1,17 @@
 import { nanoid } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
-import { decreaseOpacity } from '../../helpers/utils';
-import Hashtag from './Hashtag';
-import { ITag } from "../../types/tag.types";
+import { decreaseOpacity } from '../../../helpers/utils';
+import Hashtag from '../Hashtag';
+// import { ITag } from "../../types/tag.types";
+
+type ILocalTag = {
+  name: string;
+  color: string;
+};
 
 type Props = {
-  tags: ITag[];
+  tags: ILocalTag[];
   isColored?: boolean;
   filteredTag?: string;
 };

@@ -1,12 +1,16 @@
 import { nanoid } from '@reduxjs/toolkit';
 import tw from 'twin.macro';
-import Placeholder from './Placeholder';
+import Placeholder from '../Placeholder';
 import Post from './Post';
 // import { IPost } from "../../types/post.types";
-import { Post as IHomePost } from "../../types/queries/homePosts.types";
+import { Post as IHomePost } from "../../../types/queries/homePosts.types";
+import { ComponentProps } from "react";
+
+// type ILocalPost = {};
 
 type Props = {
-  posts: IHomePost[];
+  // posts: IHomePost[];
+  posts: ComponentProps<typeof Post>["post"][];
   filteredTag?: string;
   // toInvalidate: unknown;
   enableImages?: boolean;

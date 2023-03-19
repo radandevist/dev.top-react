@@ -1,7 +1,7 @@
 import tw, { theme } from "twin.macro"
 import useBreakpoint from "../../hooks/useBreakpoint"
 import Resources from "../../components/shared/Resources"
-import PostsList from "./PostsList"
+import PostsList from "../../components/shared/PostsList/PostsList"
 // import { IPost } from "../../types/post.types"
 import Tags from "./Tags"
 import RouteWrapper from "../../components/shared/RouteWrapper"
