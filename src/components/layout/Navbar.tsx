@@ -83,6 +83,7 @@ const Navbar = () => {
                 <Count>100</Count>
               </NotificationIcon>
               {/* <Avatar src={currentUser.picture?.url} onClick={toggleProfileMenuOpen} /> */}
+              {/* TODO: change this later */}
               <Avatar src={"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/331.jpg"} onClick={() => toggleProfileMenuOpen()} />
               <AnimatePresence>
                 {profileMenuOpen && (

@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 // import { postReducer } from "./features/post/post.reducer";
 // import { mainApiReducer, mainApiReducerPath } from "./features/mainApi/mainApi.reducer";
 import { mainApiSlice } from "./features/mainApi/mainApi.slice";
+import { searchReducer } from "./features/search/search.slice";
 
 export const store = configureStore({
   reducer: {
     [mainApiSlice.reducerPath]: mainApiSlice.reducer,
     // auth for later
     // post: postReducer,
+    search: searchReducer, 
   },
   middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware().concat(mainApiSlice.middleware),

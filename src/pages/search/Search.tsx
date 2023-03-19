@@ -30,20 +30,29 @@ const Search = () => {
         <Heading>Search results for {value}</Heading>
         <SearchWrapper>
           <Aside>
-            <Type onClick={() => setSelected()} selected={selected === 'posts'}>
+            <Type
+              onClick={() => setSelected(SearchOptions.POSTS)}
+              selected={selected === SearchOptions.POSTS}
+            >
               <Title>Posts</Title>
             </Type>
-            <Type onClick={() => setSelected('people')} selected={selected === 'people'}>
+            <Type
+              onClick={() => setSelected(SearchOptions.PEOPLE)}
+              selected={selected === SearchOptions.PEOPLE}
+            >
               <Title>People</Title>
             </Type>
-            <Type onClick={() => setSelected('tags')} selected={selected === 'tags'}>
+            <Type
+              onClick={() => setSelected(SearchOptions.TAGS)}
+              selected={selected === SearchOptions.TAGS}
+            >
               <Title>Tags</Title>
             </Type>
           </Aside>
           <Main>
-            {selected === 'posts' ? (
+            {selected === SearchOptions.POSTS ? (
               <Posts value={value} />
-            ) : selected === 'people' ? (
+            ) : selected === SearchOptions.PEOPLE ? (
               <People value={value} />
             ) : (
               <Tags value={value} />

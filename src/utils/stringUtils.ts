@@ -1,0 +1,1 @@
+export const hasOnlySpace = (str: string) => !/\S/.test(str);

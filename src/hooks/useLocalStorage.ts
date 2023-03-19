@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 const getLocalValue = <T>(key: string, initialValue: T) => {
   // If using SSR Next.js
@@ -17,8 +17,8 @@ const getLocalValue = <T>(key: string, initialValue: T) => {
   return initialValue;
 };
 
-const useLocalStorage = <T = any>(key: string, initialValue: T) => {
-  const [value, setValue] = useState(() => getLocalValue(key, initialValue));
+const useLocalStorage = <T = any>(key: string, initialValue: T): [T, Dispatch<SetStateAction<T>>] => {
+  const [value, setValue] = useState<T>(() => getLocalValue<T>(key, initialValue));
 
   useEffect(() => localStorage.setItem(key, JSON.stringify(value)), [key, value]);
 
