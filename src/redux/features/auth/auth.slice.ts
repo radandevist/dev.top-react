@@ -19,11 +19,16 @@ const authSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    setAuthState: (_state, action: PayloadAction<Required<AuthSliceState>>) => {
-      _state = action.payload;
+    setAuthState: (state, action: PayloadAction<Required<AuthSliceState>>) => {
+      // _state = action.payload;
+      state.accessToken = action.payload.accessToken
+      state.expiredAt = action.payload.expiredAt
+      state.user = action.payload.user
     },
-    resetAuthState: (_state) => {
-      _state = initialState;
+    resetAuthState: (state) => {
+      state.accessToken = null;
+      state.expiredAt = null;
+      state.user = null;
     },
     setAccessToken: (state, action: PayloadAction<string>) => {
       state.accessToken = action.payload;
@@ -36,6 +41,18 @@ const authSlice = createSlice({
     },
     resetExpiredAt: (state) => {
       state.expiredAt = null;
+    },
+    setUser: (state, action: PayloadAction<IUser>) => {
+      state.user = action.payload;
+    },
+    setUserCredentials: (state, action: PayloadAction<Partial<IUser>>) => {
+      if (!state.user) {
+        return;
+      }
+      state.user = {
+        ...state.user,
+        ...action.payload,
+      }
     }
   }
 })
@@ -46,7 +63,9 @@ export const {
   setAccessToken,
   resetAccessToken,
   setExpiredAt,
-  resetExpiredAt
+  resetExpiredAt,
+  setUser,
+  setUserCredentials,
 } = authSlice.actions;
 
 // export const selectSearchValue = (state: RootState) => state.search.value;

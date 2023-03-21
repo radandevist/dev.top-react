@@ -183,13 +183,13 @@ const Avatar = styled.img`
 `;
 
 const Login = styled(Link).attrs({
-  to: 'auth/login',
+  to: '/login',
 })`
   ${tw`rounded-md text-black py-2 px-3 hover:(text-blue bg-light-blue)`}
 `;
 
 const SignUp = styled(Link).attrs({
-  to: 'auth/new',
+  to: '/register',
 })`
   ${tw`rounded-md border border-solid border-white py-2 px-3 text-blue bg-white border-blue hover:(text-white bg-blue border-blue)`}
 `;

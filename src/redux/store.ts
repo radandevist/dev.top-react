@@ -3,13 +3,15 @@ import { configureStore } from "@reduxjs/toolkit";
 // import { mainApiReducer, mainApiReducerPath } from "./features/mainApi/mainApi.reducer";
 import { mainApiSlice } from "./features/mainApi/mainApi.slice";
 import { searchReducer } from "./features/search/search.slice";
+import { authReducer } from "./features/auth/auth.slice";
 
 export const store = configureStore({
   reducer: {
     [mainApiSlice.reducerPath]: mainApiSlice.reducer,
     // auth for later
     // post: postReducer,
-    search: searchReducer, 
+    search: searchReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware().concat(mainApiSlice.middleware),

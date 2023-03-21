@@ -5,6 +5,7 @@ import { Page404 } from "./pages/errors/Page404";
 import Layout from "./components/layout/Layout";
 import Tags from "./pages/tags/Tags";
 import Search from "./pages/search/Search";
+import Login from "./pages/login/Login";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,6 +39,9 @@ const router = createBrowserRouter(
 
         {/* User Dashboard */}
         {/* Place here if routes have the same layout */}
+
+
+        <Route path="/login" element={<Login />} />
       </Route>
 
       {/* Login and register pages for example might be placed outside like here */}

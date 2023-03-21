@@ -13,9 +13,9 @@ const mainApiPostsEndpoints = mainApiSlice.injectEndpoints({
     // searchPosts: builder.query<ApiResBody<SearchPostsQueryData>, { term: string; pageNum: number }>({
     //   query: ({ term, pageNum }) => "/posts/search?term="+term+"&page="+pageNum,
     // }),
-    login: builder.query<ApiResBody<LoginQueryData>, { email: string; password: string; }>({
+    login: builder.mutation<ApiResBody<LoginQueryData>, { email: string; password: string; }>({
       query: ({ email, password }) => ({
-        url: "/login",
+        url: "/auth/login",
         method: "POST",
         body: { email, password }
         // ? credentials: include,
@@ -27,7 +27,8 @@ const mainApiPostsEndpoints = mainApiSlice.injectEndpoints({
 export const {
   // useGetHomePostsByPageQuery,
   // useSearchPostsQuery,
-  useLazyLoginQuery,
+  // useLazyLoginQuery,
+  useLoginMutation,
 } = mainApiPostsEndpoints;
 
 export default mainApiPostsEndpoints;
