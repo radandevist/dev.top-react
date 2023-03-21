@@ -21,10 +21,13 @@ import MobileMenu from './MobileMenu';
 import Search from './Search';
 
 import devLogo from '../../assets/images/dev-unofficial.png'
+import useRequireAuth from "../../hooks/useRequireAuth";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCurrentUser } from "../../redux/features/auth/auth.slice";
 
 const Navbar = () => {
-  // const currentUser = useSelector(selectCurrentUser);
-  // const { isAuthed } = useRequireAuth();
+  const currentUser = useAppSelector(selectCurrentUser);
+  const { isAuthed } = useRequireAuth();
   // const { socket } = useContext(SocketContext);
   const isMobile = useBreakpoint(Number(theme`screens.mob.max`.replace('px', '')));
   const [profileMenuOpen, toggleProfileMenuOpen] = useToggle(false);
@@ -50,7 +53,7 @@ const Navbar = () => {
   //   return () => socket.off('notificationReceived');
   // }, []);
 
-  const isAuthed = false;
+  // const isAuthed = false;
 
   return (
     <Wrapper>
@@ -82,25 +85,25 @@ const Navbar = () => {
                 {/* {unreadNotifications?.length > 0 && <Count>{unreadNotifications.length}</Count>} */}
                 <Count>100</Count>
               </NotificationIcon>
-              {/* <Avatar src={currentUser.picture?.url} onClick={toggleProfileMenuOpen} /> */}
+              <Avatar src={currentUser?.profilePicUrl} onClick={() => toggleProfileMenuOpen()} />
               {/* TODO: change this later */}
-              <Avatar src={"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/331.jpg"} onClick={() => toggleProfileMenuOpen()} />
+              {/* <Avatar src={"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/331.jpg"} onClick={() => toggleProfileMenuOpen()} /> */}
               <AnimatePresence>
                 {profileMenuOpen && (
                   <ProfileMenu variants={profileMenu} initial='initial' animate='shown' exit='exit'>
                     <ListItem>
-                      {/* <Link to={`/${currentUser.username}`}>
-                        <Name>{currentUser.name}</Name>
+                      <Link to={`/${currentUser?.userName}`}>
+                        <Name>{currentUser?.firstName} {currentUser?.lastName}</Name>
                         <UserGmail>
-                          @{currentUser.email.slice(0, currentUser.email.indexOf('@'))}
+                          @{currentUser?.email.slice(0, currentUser?.email.indexOf('@'))}
                         </UserGmail>
-                      </Link> */}
-                      <Link to={`/user-profile`}>
+                      </Link>
+                      {/* <Link to={`/user-profile`}>
                         <Name>Daniel</Name>
                         <UserGmail>
                           @radandevist
                         </UserGmail>
-                      </Link>
+                      </Link> */}
                     </ListItem>
                     <ListItem>
                       <Link to='dashboard'>Dashboard</Link>

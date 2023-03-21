@@ -25,6 +25,7 @@ import image7 from "../../assets/images/code-of-conduct.png"
 import image8 from "../../assets/images/privacy-policy.png"
 import image9 from "../../assets/images/terms-of-use.png"
 import Social from "./Social";
+import useRequireAuth from "../../hooks/useRequireAuth";
 
 type Props = {
   saved: boolean;
@@ -32,7 +33,7 @@ type Props = {
 
 const Resources = ({ saved }: Props) => {
   const navigate = useNavigate();
-  // const { isAuthed } = useRequireAuth();
+  const { isAuthed } = useRequireAuth();
   // const { id: userId } = useSelector(selectCurrentUser);
   // const [trigger, { data: followingTags }] = useLazyGetFollowingTagsQuery();
   // const { data: tags } = useGetNumTagsQuery(null, { refetchOnMountOrArgChange: true });
@@ -41,7 +42,7 @@ const Resources = ({ saved }: Props) => {
   //   if (isAuthed) trigger({ userId });
   // }, [userId]);
 
-  const isAuthed = false;
+  // const isAuthed = false;
   const followingTags: any[] = [];
   const tags: any[] = [];
 
