@@ -68,6 +68,6 @@ export const {
   setUserCredentials,
 } = authSlice.actions;
 
-// export const selectSearchValue = (state: RootState) => state.search.value;
+export const selectAccessToken = (state: RootState) => state.auth.accessToken;
 
 export const { reducer: authReducer } = authSlice;
