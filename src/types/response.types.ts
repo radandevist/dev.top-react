@@ -9,3 +9,9 @@ export type ApiResBody<D> = {
   status: "success";
   data: D;
 };
+
+export type ApiErrorBody = {
+  status: "error";
+  // data: D;
+  message: string;
+};
