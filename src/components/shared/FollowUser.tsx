@@ -10,7 +10,7 @@ type Props = {
   currentUser: unknown;
   previewedUser: unknown;
   bottom?: boolean;
-  preventPropagation: boolean;
+  preventPropagation?: boolean;
 }
 
 const FollowUser = ({ 

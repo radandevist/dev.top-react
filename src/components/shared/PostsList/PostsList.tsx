@@ -12,8 +12,8 @@ type Props = {
   // posts: IHomePost[];
   posts: ComponentProps<typeof Post>["post"][];
   filteredTag?: string;
-  // toInvalidate: unknown;
   enableImages?: boolean;
+  // toInvalidate: unknown; // used for post reactions
 };
 
 const PostsList = ({ posts, filteredTag, /* toInvalidate */ enableImages = true }: Props) => {

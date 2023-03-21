@@ -1,10 +1,4 @@
-// To parse this data:
-//
-//   import { Convert, HomePostsQueryData } from "./file";
-//
-//   const homePostsQueryData = Convert.toHomePostsQueryData(json);
-
-export type HomePostsQueryData = {
+export type UserProfilePostsQueryData = {
   postsCount: number;
   count:      number;
   posts:      Post[];
@@ -13,7 +7,7 @@ export type HomePostsQueryData = {
 export type Post = {
   id:            string;
   title:         string;
-  subtitle:      string;
+  subtitle:      string | null;
   content:       string;
   coverImageUrl: string;
   slug:          string;
@@ -46,6 +40,7 @@ export type Author = {
   profilePicUrl: string | null;
   createdAt:     Date;
   updatedAt:     Date;
+  // TODO: Add up the other fields related to the profile
 }
 
 export type Tag = {
@@ -58,11 +53,11 @@ export type Tag = {
 
 // // Converts JSON strings to/from your types
 // export class Convert {
-//   public static toHomePostsQueryData(json: string): HomePostsQueryData {
+//   public static toSearchPostsQueryData(json: string): SearchPostsQueryData {
 //       return JSON.parse(json);
 //   }
 
-//   public static homePostsQueryDataToJson(value: HomePostsQueryData): string {
+//   public static searchPostsQueryDataToJson(value: SearchPostsQueryData): string {
 //       return JSON.stringify(value);
 //   }
 // }

@@ -16,8 +16,8 @@ import Tags from './Tags';
 
 type ILocalAuthor = {
   userName: string;
-  profilePicUrl: string;
-  firstName?: string;
+  profilePicUrl: string | null;
+  firstName: string | null;
   lastName: string;
 };
 
@@ -33,7 +33,7 @@ type ILocalPost = {
   title: string;
   // subtitle: string;
   content: string;
-  coverImageUrl: string;
+  coverImageUrl: string | null;
   // slug: string;
   // deleted: boolean;
   // pinned: boolean;
@@ -98,7 +98,7 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
     post && (
       <Wrapper>
         {isFirstPost && (
-          <Image
+          post.coverImageUrl && <Image
             onClick={() =>
               navigate(`/${post.author.userName}/${createPostUrl(post.title, post.id)}`)
             }
@@ -109,7 +109,7 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
         <Content>
           <Header onClick={() => navigate(`/${post?.author.userName}`)}>
             {/* <Author src={post.author?.picture?.url} /> */}
-            <Author src={post.author.profilePicUrl} />
+            <Author src={post.author.profilePicUrl || ''} />
             <AuthorMeta>
               {/* <AuthorName>{post.author?.name}</AuthorName> */}
               <AuthorName>{post.author.firstName || ''} {post.author.lastName}</AuthorName>

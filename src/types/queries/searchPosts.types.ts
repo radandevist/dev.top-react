@@ -13,7 +13,7 @@ export type SearchPostsQueryData = {
 export type Post = {
   id:            string;
   title:         string;
-  subtitle:      string;
+  subtitle:      string | null;
   content:       string;
   coverImageUrl: string;
   slug:          string;
@@ -36,16 +36,17 @@ export type Count = {
 
 export type Author = {
   id:            string;
-  firstName:     string;
+  firstName:     string | null;
   lastName:      string;
   userName:      string;
   email:         string;
   password:      string;
   role:          string;
   verified:      boolean;
-  profilePicUrl: string;
+  profilePicUrl: string | null;
   createdAt:     Date;
   updatedAt:     Date;
+  // TODO: Add up the other fields related to the profile
 }
 
 export type Tag = {
