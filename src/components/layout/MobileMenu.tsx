@@ -13,7 +13,7 @@ const MobileMenu = ({ toggleMobileMenu }: Props) => {
   return (
     <>
       <Backdrop onClick={() => toggleMobileMenu()} />
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence /* exitBeforeEnter */ mode='wait'>
         <Wrapper variants={mobileMenu} initial='initial' animate='shown' exit='exit'>
           <Menu>
             <Heading>DEV Community</Heading>
