@@ -14,6 +14,8 @@ import Tags from './Tags';
 // import { IPost } from "../../types/post.types";
 // import { HomePostsQueryData /* Type */ } from "../../../types/queries/homePosts.types";
 
+import genericProfilePic from "../../../assets/images/generic-avatar-icon-25.jpg";
+
 type ILocalAuthor = {
   userName: string;
   profilePicUrl: string | null;
@@ -109,7 +111,7 @@ const Post = ({ post, isFirstPost, filteredTag, /* toInvalidate */ }: Props) => 
         <Content>
           <Header onClick={() => navigate(`/${post?.author.userName}`)}>
             {/* <Author src={post.author?.picture?.url} /> */}
-            <Author src={post.author.profilePicUrl || ''} />
+            <Author src={post.author.profilePicUrl || genericProfilePic} />
             <AuthorMeta>
               {/* <AuthorName>{post.author?.name}</AuthorName> */}
               <AuthorName>{post.author.firstName || ''} {post.author.lastName}</AuthorName>
