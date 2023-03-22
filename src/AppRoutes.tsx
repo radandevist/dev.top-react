@@ -7,6 +7,7 @@ import Search from "./pages/search/Search";
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import NotFound from "./components/shared/NotFound";
+import SignUp from "./pages/signUp/SignUp";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
         </Route>
 
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<SignUp />} />
 
         <Route path="*" element={<NotFound />} />
       </Route>

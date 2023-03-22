@@ -1,9 +1,18 @@
 import { mainApiSlice } from "../mainApi.slice";
 import { ApiResBody } from "../../../../types/response.types";
-import { HomePostsQueryData } from "../../../../types/queries/homePosts.types";
-import { SearchPostsQueryData } from "../../../../types/queries/searchPosts.types";
-import { IUser } from "../../../../types/user.types";
+// import { HomePostsQueryData } from "../../../../types/queries/homePosts.types";
+// import { SearchPostsQueryData } from "../../../../types/queries/searchPosts.types";
+// import { IUser } from "../../../../types/user.types";
 import { LoginQueryData } from "../../../../types/queries/login.types";
+
+type SignupInput = {
+  userName?: string;
+  password: string;
+  firstName?: string;
+  lastName: string;
+  email: string;
+  confirmPassword: string;
+};
 
 const mainApiPostsEndpoints = mainApiSlice.injectEndpoints({
   endpoints: builder => ({
@@ -21,6 +30,13 @@ const mainApiPostsEndpoints = mainApiSlice.injectEndpoints({
         // ? credentials: include,
       })
     }),
+    signUp: builder.mutation<ApiResBody<LoginQueryData>, SignupInput>({
+      query: ({ userName, password, firstName, lastName, email, confirmPassword }) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: { userName, password, firstName, lastName, email, confirmPassword },
+      }),
+    }),
   }),
 })
 
@@ -29,6 +45,7 @@ export const {
   // useSearchPostsQuery,
   // useLazyLoginQuery,
   useLoginMutation,
+  useSignUpMutation,
 } = mainApiPostsEndpoints;
 
 export default mainApiPostsEndpoints;

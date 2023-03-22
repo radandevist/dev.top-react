@@ -10,7 +10,7 @@ const mainApiPostsEndpoints = mainApiSlice.injectEndpoints({
       query: (pageNum: number) => "/posts/home?page="+pageNum,
     }),
     searchPosts: builder.query<ApiResBody<SearchPostsQueryData>, { term: string; pageNum: number }>({
-      query: ({ term, pageNum }) => "/posts/search?term="+term+"page="+pageNum,
+      query: ({ term, pageNum }) => "/posts/search?term="+term+"&page="+pageNum,
     }),
   }),
 })
