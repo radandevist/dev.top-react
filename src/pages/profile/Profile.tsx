@@ -26,7 +26,7 @@ import FollowUser from "../../components/shared/FollowUser";
 import NotFound from "../../components/shared/NotFound";
 import PostsList from "../../components/shared/PostsList/PostsList";
 import { useGetUserProfileQuery } from "../../redux/features/mainApi/endpoints/users.endpoints";
-import { useGetUserProfilePostsQuery } from "../../redux/features/mainApi/endpoints/posts.endpoints";
+import { useGetUserProfilePostsQuery } from "../../redux/features/mainApi/endpoints/users.endpoints";
 
 const Profile = () => {
   const navigate = useNavigate();
