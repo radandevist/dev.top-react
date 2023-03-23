@@ -25,6 +25,8 @@ import useRequireAuth from "../../hooks/useRequireAuth";
 import { useAppSelector } from "../../redux/hooks";
 import { selectCurrentUser } from "../../redux/features/auth/auth.slice";
 
+import defaultProfilePic from "../../assets/images/default-avatar.png"
+
 const Navbar = () => {
   const currentUser = useAppSelector(selectCurrentUser);
   const { isAuthed } = useRequireAuth();
@@ -85,9 +87,7 @@ const Navbar = () => {
                 {/* {unreadNotifications?.length > 0 && <Count>{unreadNotifications.length}</Count>} */}
                 <Count>100</Count>
               </NotificationIcon>
-              <Avatar src={currentUser?.profilePicUrl} onClick={() => toggleProfileMenuOpen()} />
-              {/* TODO: change this later */}
-              {/* <Avatar src={"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/331.jpg"} onClick={() => toggleProfileMenuOpen()} /> */}
+              <Avatar src={currentUser?.profilePicUrl || defaultProfilePic} onClick={() => toggleProfileMenuOpen()} />
               <AnimatePresence>
                 {profileMenuOpen && (
                   <ProfileMenu variants={profileMenu} initial='initial' animate='shown' exit='exit'>
@@ -98,12 +98,6 @@ const Navbar = () => {
                           @{currentUser?.email.slice(0, currentUser?.email.indexOf('@'))}
                         </UserGmail>
                       </Link>
-                      {/* <Link to={`/user-profile`}>
-                        <Name>Daniel</Name>
-                        <UserGmail>
-                          @radandevist
-                        </UserGmail>
-                      </Link> */}
                     </ListItem>
                     <ListItem>
                       <Link to='dashboard'>Dashboard</Link>
@@ -118,7 +112,7 @@ const Navbar = () => {
                       <Link to='customize'>Settings</Link>
                     </ListItem>
                     <ListItem>
-                      <Link to='/auth/confirm/logout-account'>Sign Out</Link>
+                      <Link to='/confirm-logout'>Sign Out</Link>
                     </ListItem>
                   </ProfileMenu>
                 )}

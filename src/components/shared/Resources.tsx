@@ -192,7 +192,7 @@ const Buttons = tw.div`flex flex-col text-center gap-2`;
 //     <Link to={to} tw="w-full rounded-md text-black py-2 px-3 hover:(text-blue bg-light-blue)">{children}</Link>
 //   )
 // }
-const Login = styled(Link).attrs({ to: "auth/login" })`
+const Login = styled(Link).attrs({ to: "/login" })`
   ${tw`w-full rounded-md text-black py-2 px-3 hover:(text-blue bg-light-blue)`}
 `;
 

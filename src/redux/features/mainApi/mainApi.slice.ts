@@ -11,7 +11,7 @@ import { RootState, persistor } from "../../store";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:3300/api', // TODO: put in a centralized config
-  // credentials: "include"
+  credentials: "include",
   prepareHeaders: (headers, api) => {
     const token = (api.getState() as RootState).auth.accessToken;
     if (token) headers.set("authorization", token);
@@ -25,7 +25,7 @@ const baseQueryWithReAuth: BaseQueryFn = async (args, api, extraOptions) => {
   if (
     // see our backend
     result?.error?.status === 401
-    && (result.error.data as ApiErrorBody).message === "Authentication required"
+    && (result.error.data as ApiErrorBody)?.message === "Authentication required"
   ) {
     const refreshResult = await baseQuery('/refresh', api, extraOptions)
 
