@@ -27,7 +27,7 @@ import NotFound from "../../components/shared/NotFound";
 import PostsList from "../../components/shared/PostsList/PostsList";
 import { useGetUserProfileQuery } from "../../redux/features/mainApi/endpoints/users.endpoints";
 import { useGetUserProfilePostsQuery } from "../../redux/features/mainApi/endpoints/users.endpoints";
-import useRequireAuth from "../../hooks/useRequireAuth";
+// import useRequireAuth from "../../hooks/useRequireAuth";
 
 import genericProfilePic from "../../assets/images/generic-avatar-icon-25.jpg";
 
@@ -35,7 +35,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
   const { userName } = useParams();
-  const { isAuthed } = useRequireAuth();
+  // const { isAuthed } = useRequireAuth();
   // const { data: previewedUser, isLoading } = useGetUserQuery(userName, {
   //   refetchOnMountOrArgChange: true,
   // });
@@ -62,16 +62,9 @@ const Profile = () => {
         <Wrapper>
           <Card>
             <Avatar src={previewedUser.profilePicUrl || genericProfilePic} />
-            {isAuthed &&
-              (previewedUser.userName === currentUser?.userName
-                ? (
-                  <EditButton onClick={() => navigate('/customize')}>Edit profile</EditButton>
-                )
-                : (
-                  <FollowUser currentUser={currentUser} previewedUser={previewedUser} />
-                )
-              )
-            }
+            {previewedUser.userName === currentUser?.userName
+              ? <EditButton onClick={() => navigate('/customize')}>Edit profile</EditButton>
+              : <FollowUser currentUser={currentUser} previewedUser={previewedUser} />}
             <Name>{previewedUser.firstName} {previewedUser.lastName}</Name>
             <Bio>{previewedUser.bio || 'No bio'}</Bio>
             <Other>
@@ -146,14 +139,14 @@ const Profile = () => {
                 <LoadingSpinner />
               ) : (
                 <PostsList
-                // posts={previewedUser.posts}
-                posts={previewedUserPosts || []}
-                // toInvalidate={{
-                //   type: 'User',
-                //   id: previewedUser.id,
-                //   extra: { username },
-                // }}
-              />
+                  // posts={previewedUser.posts}
+                  posts={previewedUserPosts || []}
+                  // toInvalidate={{
+                  //   type: 'User',
+                  //   id: previewedUser.id,
+                  //   extra: { username },
+                  // }}
+                />
               )}
             </Posts>
           </MoreInfo>

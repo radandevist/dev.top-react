@@ -1,23 +1,32 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 // import { postReducer } from "./features/post/post.reducer";
 // import { mainApiReducer, mainApiReducerPath } from "./features/mainApi/mainApi.reducer";
 import { mainApiSlice } from "./features/mainApi/mainApi.slice";
 import { searchReducer } from "./features/search/search.slice";
 import { authReducer } from "./features/auth/auth.slice";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-export const store = configureStore({
-  reducer: {
-    [mainApiSlice.reducerPath]: mainApiSlice.reducer,
-    // auth for later
-    // post: postReducer,
+const rootReducer = combineReducers({
+  [mainApiSlice.reducerPath]: mainApiSlice.reducer,
     search: searchReducer,
     auth: authReducer,
-  },
-  middleware: (getDefaultMiddleware) => 
-    getDefaultMiddleware().concat(mainApiSlice.middleware),
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+const persistedRootReducer = persistReducer({
+  key: 'root',
+  storage,
+  whitelist: ['auth'],
+}, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedRootReducer,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(mainApiSlice.middleware)
+  },
+})
+
+export const persistor = persistStore(store);
+
 export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch

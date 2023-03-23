@@ -1,12 +1,14 @@
 import { Provider as ReduxProvider } from "react-redux"
+import { persistor, store } from "./redux/store"
 import { AppRoutes } from "./AppRoutes"
-import { store } from "./redux/store"
+import { PersistGate } from "redux-persist/integration/react"
 
 export function App() {
   return (
-    // Wrap the route with the providers here
     <ReduxProvider store={store}>
-      <AppRoutes />
+      <PersistGate loading={null} persistor={persistor}>
+        <AppRoutes />
+      </PersistGate>
     </ReduxProvider>
   )
 }

@@ -2,6 +2,7 @@ import { BaseQueryFn, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/r
 import { ApiErrorBody, ApiResBody } from "../../../types/response.types";
 import { resetAuthState, setAccessToken, setExpiredAt } from "../auth/auth.slice";
 import { IUser } from "../../../types/user.types";
+import { RootState, persistor } from "../../store";
 // import { IPost } from "../features/post/post.reducer";
 // import { ApiResBody } from "../../../types/response.types";
 // import { HomePostsQueryData } from "../../../types/queries/homePosts.types";
@@ -9,8 +10,13 @@ import { IUser } from "../../../types/user.types";
 // import { HomePostsQueryData } from "../../types/post.types";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:3300/api',
+  baseUrl: 'http://localhost:3300/api', // TODO: put in a centralized config
   // credentials: "include"
+  prepareHeaders: (headers, api) => {
+    const token = (api.getState() as RootState).auth.accessToken;
+    if (token) headers.set("authorization", token);
+    return headers;
+  },
 });
 
 const baseQueryWithReAuth: BaseQueryFn = async (args, api, extraOptions) => {
@@ -43,6 +49,7 @@ const baseQueryWithReAuth: BaseQueryFn = async (args, api, extraOptions) => {
       // if auth fails for example when the refresh token cookie is expired too
       await baseQuery("/logout", api, extraOptions);
       api.dispatch(resetAuthState());
+      persistor.purge();
     }
   }
 
